@@ -58,7 +58,7 @@ const initialState = {
     plan: ''
 }
 
-const Formulario = () => {
+const Formulario = ({ setResumen}) => {
     const marcas = ['americano', 'europeo', 'asiatico']
     const anios = ['2022', '2021','2020', '2019', '2018', '2017', '2016', '2015','2014', '2013', '2012'];
 
@@ -109,6 +109,10 @@ const Formulario = () => {
         console.log(resultado);
 
         // total
+        setResumen( {
+            cotizacion: resultado,
+            datos
+        })
     }
 
   return (
