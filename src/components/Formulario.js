@@ -58,7 +58,7 @@ const initialState = {
     plan: ''
 }
 
-const Formulario = ({ setResumen}) => {
+const Formulario = ({ setResumen, setSpin}) => {
     const marcas = ['americano', 'europeo', 'asiatico']
     const anios = ['2022', '2021','2020', '2019', '2018', '2017', '2016', '2015','2014', '2013', '2012'];
 
@@ -80,6 +80,7 @@ const Formulario = ({ setResumen}) => {
     // cuando se hace submit
     const handleSubmit = e => {
         e.preventDefault();
+        
         if( marca.trim() === '' || year.trim() === '' || plan.trim() === ''){
             setError( true );
             return;
@@ -106,13 +107,21 @@ const Formulario = ({ setResumen}) => {
         // completo 50%
         const incrementoPlan = calcularPlan( plan );
         resultado = parseFloat( incrementoPlan * resultado).toFixed(2);
-        console.log(resultado);
+        setSpin( true );
 
-        // total
-        setResumen( {
-            cotizacion: resultado,
-            datos
-        })
+        setTimeout(() => {
+            setSpin( false );
+            // total
+            setResumen( {
+                cotizacion: resultado,
+                datos
+            })
+            setDatos( initialState)
+            
+        }, 2000);
+
+        setResumen({});
+
     }
 
   return (

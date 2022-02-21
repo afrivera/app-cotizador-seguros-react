@@ -4,6 +4,7 @@ import Formulario from "./components/Formulario";
 import { useState } from "react";
 import Resumen from "./components/Resumen";
 import Resultado from "./components/Resultado";
+import Spinner from "./components/Spinner";
 
 const Contenedor = styled.div`
   max-width: 600px;
@@ -25,6 +26,7 @@ const Mensaje = styled.p`
 const  App= ()=> {
 
   const [resumen, setResumen] = useState({})
+  const [spin, setSpin] = useState(false)
 
   const { datos = null, cotizacion } = resumen;
   
@@ -37,6 +39,7 @@ const  App= ()=> {
       <ContenedorFormulario>
         <Formulario 
           setResumen = { setResumen }
+          setSpin = { setSpin }
         />
         {
           datos && 
@@ -45,14 +48,15 @@ const  App= ()=> {
             />
         }
         {
+          spin ? <Spinner /> :
           cotizacion ?
                       <Resultado 
                         cotizacion = { cotizacion }
                       />
                       :
                       <Mensaje>Elige marca, año y tipo de seguro</Mensaje>
-
         }
+        
       </ContenedorFormulario>
 
     </Contenedor>
